@@ -1,5 +1,5 @@
 {
-  "name": "palmg-official",
+  "name": "palmg-next",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,15 +7,18 @@
     "dev": "next",
     "dev-server": "node server/expressServer.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server/expressServer.js"
+    "start": "cross-env NODE_ENV=production node server/expressServer.js",
+    "babel": "npx babel lib --out-dir d"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chkui/palmg-official.git"
+    "url": "git+https://github.com/palmg/website-with-next.git"
   },
-  "keywords": [],
+  "keywords": [
+    "palmg, react, nextjs"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/chkui/palmg-official/issues"
   },
@@ -30,6 +33,7 @@
     "ua-parser-js": "^0.7.19"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "babel-plugin-import": "^1.11.0",
