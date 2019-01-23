@@ -1,0 +1,10 @@
+# nodejs
+node_modules
+example/**/node_modules
+
+# local ide. Any contributor can add your ide local package here!
+.idea
+
+# npm install lock
+package-lock.json
+example/**/package-lock.json

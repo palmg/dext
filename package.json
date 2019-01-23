@@ -1,7 +1,7 @@
 {
   "name": "dossr",
   "version": "0.0.1",
-  "description": "",
+  "description": "sever side render",
   "workspaces": [
     "dist/*"
   ],
