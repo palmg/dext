@@ -1,6 +1,2 @@
-import route from './route/routing'
-import Link from './route/link'
-import Anchor from './route/anchor'
-
-export default {route, Link, Anchor}
-export {route, Link, Anchor}
+import router from './route/routing'
+export default router
