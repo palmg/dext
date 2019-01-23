@@ -4,6 +4,7 @@
 # nodejs
 node_modules
 example/**/node_modules
+example/**/dist
 
 # local ide. Any contributor can add your ide local package here!
 .idea
