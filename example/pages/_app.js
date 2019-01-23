@@ -1,10 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
-import Application from '../lib/application'
+import {App} from '../../dext'
 import {Container} from 'next/app'
-import Framework from '../components/app/framework'
+import Layout from '../components/app/layout'
 
-class App extends Application {
+export default class TextApp extends App {
     render() {
         const {Component, pageProps} = this.props;
         return (
@@ -14,12 +14,10 @@ class App extends Application {
                     <meta charSet='utf-8'/>
                     <meta name='viewport' content='initial-scale=1.0, width=device-width'/>
                 </Head>
-                {super.render(<Framework>
+                {super.render(<Layout>
                     <Component {...pageProps} />
-                </Framework>)}
+                </Layout>)}
             </Container>
         );
     }
 }
-
-export default App

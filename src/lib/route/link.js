@@ -1,6 +1,6 @@
 import React from 'react'
 import OriLink from 'next/link'
-import {generateSign} from '../../../website-standard-with-next/util/routingTypeSign'
+import {generateSign} from '../util/routingTypeSign'
 
 /**
  * ’next/link‘标签扩展，用于适应本地跳转

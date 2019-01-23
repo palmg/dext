@@ -1,7 +1,7 @@
 import React from 'react'
-import Loading from './framework/loading'
-import Menu from './framework/menu'
-import router from '../../lib/router'
+import Loading from './layout/loading'
+import Menu from './layout/menu'
+import router from '../../../lib/router'
 
 const cn = require('classnames/bind').bind(require('./application.scss'));
 
@@ -10,7 +10,7 @@ const cn = require('classnames/bind').bind(require('./application.scss'));
  * @param props
  * @param props.onMenuClick {Function} 点击事件回调 (id, event)
  */
-class Framework extends React.Component {
+class Layout extends React.Component {
     render() {
         const {props} = this, {route} = props;
         return (<React.Fragment>
@@ -27,4 +27,4 @@ class Framework extends React.Component {
     }
 }
 
-export default router.route(Framework)
+export default router.route(Layout)

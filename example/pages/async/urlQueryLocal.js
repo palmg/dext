@@ -1,5 +1,5 @@
 import React from 'react'
-import router, {Link} from '../../lib/router'
+import router, {Link} from '../../../lib/router'
 import {loadTvList} from '../../components/async/standard/db'
 import Loading from '../../components/app/framework/loading'
 

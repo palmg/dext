@@ -2,7 +2,7 @@ import React from 'react'
 import Link from "next/link";
 import {withRouter} from "next/router";
 import {getMenus} from './menu/db'
-import serverPreload from '../../../lib/serverPreload'
+import serverPreload from '../../../../lib/serverPreload'
 const cn = require('classnames/bind').bind(require('./menus.scss'));
 
 const Menu = props => {

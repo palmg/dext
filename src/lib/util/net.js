@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-export const net = function (url, data) {
+export default function (url, data) {
     const options = {
         method: 'undefined' === typeof data ? 'GET' : 'POST'
     };

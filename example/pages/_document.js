@@ -1,4 +1,4 @@
-import Document from '../lib/document'
+import {Document} from '../../dext'
 import UaParser from 'ua-parser-js'
 import React from "react";
 
@@ -7,6 +7,6 @@ import React from "react";
  * 2. 仅仅会在服务端运行，所以切记不要将事件等功能写在这里
  * 3. 通常用于常规静态样式构建.
  */
-export default class DocumentExt extends Document {
+export default class TextDocument extends Document {
 
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import {withRouter} from 'next/router'
-import {generateSign, checkSign} from '../../../website-standard-with-next/util/routingTypeSign'
+import {generateSign, checkSign} from '../util/routingTypeSign'
 
 const RouteType = {
     Start: 'startRoute',

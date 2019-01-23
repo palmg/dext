@@ -1,4 +1,4 @@
-import {net} from '../../../lib/util/net'
+import {net} from '../../../../lib/util/net'
 
 
 export async function loadTvList(q) {
