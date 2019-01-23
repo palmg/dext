@@ -1,3 +1,6 @@
+# next output
+.next
+
 # nodejs
 node_modules
 example/**/node_modules

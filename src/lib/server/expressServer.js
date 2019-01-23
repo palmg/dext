@@ -1,19 +1,16 @@
 const express = require('express'),
     next = require('next');
 
-export default (middleware, port) => {
-    //环境指示器
+module.exports = (middlewares = [], port = 3000) => {
     const env = process.env.NODE_ENV !== 'production',
         // 创建一个服务端运行的Next app
         app = next({env}),
         // 请求处理器
-        handle = app.getRequestHandler(),
-        //端口
-        p = port || 3000;
+        handle = app.getRequestHandler();
     app.prepare()
         .then(() => {
             const server = express();
-            middleware && middleware.forEach(foo => {
+            middlewares.forEach(foo => {
                 server.use((req, res, next) => {
                     foo(app, req, res, next)
                 })
@@ -21,12 +18,13 @@ export default (middleware, port) => {
             server.get('*', (req, res) => {
                 return handle(req, res);
             });
-            server.listen(p, (err) => {
+            server.listen(port, (err) => {
                 if (err) throw err;
-                console.log(`> Ready on http://localhost:${p}`)
+                console.log(`> Ready on http://localhost:${port}`)
             })
         }).catch((ex) => {
         console.error(ex.stack);
         process.exit(1)
     });
-}
+};
+module.exports.defualt = module.exports

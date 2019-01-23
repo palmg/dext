@@ -13,4 +13,5 @@ Index.serverPreload = serverPreload;
 Index.router = router;
 Index.Link = Link;
 Index.Anchor = Anchor;
+
 export default Index

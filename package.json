@@ -1,16 +1,22 @@
 {
   "name": "dossr",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "sever side render",
   "workspaces": [
     "dist/*"
   ],
   "scripts": {
     "dev": "next",
-    "dev-server": "node server/expressServer.js",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server/expressServer.js",
-    "babel": "npx babel src --out-dir ."
+    "start": "NODE_ENV=production node server/expressServer.js",
+    "compile": "npx babel src --out-dir dist",
+    "copy": "sh sh/copy.sh",
+    "package": "npm run compile & npm run copy",
+    "publish": "npm publish dist",
+    "package-copy-lib": "npx babel lib --out-dir example/standard/node_modules/dossr/lib --copy-files",
+    "package-copy-files": "npx babel index.js net.js server.js package.json --out-dir example/standard/node_modules/dossr --copy-files",
+    "package-copy": "npm run package-copy-lib & npm run package-copy-files",
+    "package-build": "npm run package & npm run package-copy"
   },
   "repository": {
     "type": "git",
@@ -32,6 +38,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "copyfiles": "^2.1.0",
+    "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },

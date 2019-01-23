@@ -12,7 +12,7 @@ var _link = _interopRequireDefault(require("next/link"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Anchor = function Anchor(props) {
-  return _react.default.createElement(OriLink, props);
+  return _react.default.createElement(_link.default, props);
 };
 
 var _default = Anchor;
