@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import App from '../../../src/lib/application'
+import {App} from 'dossr'
 import {Container} from 'next/app'
 import Layout from '../components/app/layout'
 

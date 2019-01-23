@@ -9,6 +9,18 @@ Object.defineProperty(exports, "App", {
     return _application.default;
   }
 });
+Object.defineProperty(exports, "Head", {
+  enumerable: true,
+  get: function get() {
+    return _head.default;
+  }
+});
+Object.defineProperty(exports, "Container", {
+  enumerable: true,
+  get: function get() {
+    return _app.Container;
+  }
+});
 Object.defineProperty(exports, "Document", {
   enumerable: true,
   get: function get() {
@@ -43,6 +55,10 @@ exports.default = void 0;
 
 var _application = _interopRequireDefault(require("./lib/application"));
 
+var _head = _interopRequireDefault(require("next/head"));
+
+var _app = require("next/app");
+
 var _document = _interopRequireDefault(require("./lib/document"));
 
 var _serverPreload = _interopRequireDefault(require("./lib/serverPreload"));
@@ -57,6 +73,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Index = {};
 Index.App = _application.default;
+Index.Head = _head.default;
+Index.Container = _app.Container;
 Index.Document = _document.default;
 Index.serverPreload = _serverPreload.default;
 Index.router = _router.default;

@@ -1,10 +1,8 @@
 {
   "name": "dossr",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "sever side render",
-  "workspaces": [
-    "dist/*"
-  ],
+  "main": "./index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -27,6 +25,9 @@
   ],
   "author": "palmg",
   "license": "MIT",
+  "bin": {
+    "create-dossr": "./bin/next create-app"
+  },
   "bugs": {
     "url": "https://github.com/palmg/dossr/issues"
   },

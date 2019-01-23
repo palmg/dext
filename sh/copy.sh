@@ -2,8 +2,12 @@
 echo work Dir:$(pwd)
 cp package.json dist/
 echo Copy package.json Complete!
+
+cp -r bin/ dist/
+echo Copy bin/ Complete!
+
 cp -r example/ dist/
 for folder in 'standard' 'simple' 'with-antd';do
-    rm -r -f dist/example/$folder/.idea dist/example/$folder/node_modules dist/example/$folder/package-lock.json
+    rm -r -f dist/example/$folder/.idea dist/example/$folder/node_modules dist/example/$folder/dist dist/example/$folder/package-lock.json
 done
 echo Copy example/ Complete!

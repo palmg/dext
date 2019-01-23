@@ -1,8 +1,7 @@
 import React from 'react'
-import Link from "next/link";
 import {withRouter} from "next/router";
 import {getMenus} from './menu/db'
-import {serverPreload} from 'dossr'
+import {Anchor, serverPreload} from 'dossr'
 const cn = require('classnames/bind').bind(require('./menus.scss'));
 
 const Menu = props => {
@@ -11,9 +10,9 @@ const Menu = props => {
     return (<ul>
         {menus.map(menu => (
             <li className={cn('li')} key={menu.key}>
-                <Link href={menu.href}>
+                <Anchor href={menu.href}>
                     <a>{menu.name}</a>
-                </Link>
+                </Anchor>
             </li>
         ))}
     </ul>);

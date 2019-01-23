@@ -1,10 +1,7 @@
 {
-  "name": "dossr",
+  "name": "dossr-standard-example",
   "version": "1.0.0",
   "description": "",
-  "workspaces": [
-    "dist/*"
-  ],
   "scripts": {
     "dev": "next",
     "dev-server": "node server/expressServer.js",
@@ -25,10 +22,10 @@
   },
   "homepage": "https://github.com/palmg/dossr#readme",
   "dependencies": {
+    "dossr": "0.0.3",
     "next": "^7.0.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "dossr": "git+https://github.com/palmg/dossr.git"
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

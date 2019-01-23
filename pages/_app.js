@@ -1,7 +1,5 @@
 import React from 'react'
-import Head from 'next/head'
-import {App} from '../src'
-import {Container} from 'next/app'
+import {App, Head, Container} from '../src'
 import Layout from '../components/app/layout'
 
 export default class TextApp extends App {

@@ -3,8 +3,6 @@ import Loading from './layout/loading'
 import Menu from './layout/menu'
 import {router} from 'dossr'
 
-const cn = require('classnames/bind').bind(require('./application.scss'));
-
 /**
  * 框架组件
  * @param props
@@ -14,16 +12,16 @@ class Layout extends React.Component {
     render() {
         const {props} = this, {route} = props;
         return (<React.Fragment>
-                <header style={{height: '46px'}}>
-                    <Menu/>
-                </header>
-                <section style={{position: 'relative', padding: '50px'}}>
-                    {route.isPageRoute ? (<Loading/>) : this.props.children}
-                </section>
-                <footer style={{textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)'}}>
-                    模板案例
-                </footer>
-            </React.Fragment>);
+            <header style={{height: '46px'}}>
+                <Menu/>
+            </header>
+            <section style={{position: 'relative', padding: '50px'}}>
+                {route.isPageRoute ? (<Loading/>) : this.props.children}
+            </section>
+            <footer style={{textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)'}}>
+                模板案例
+            </footer>
+        </React.Fragment>);
     }
 }
 
