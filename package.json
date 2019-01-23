@@ -7,9 +7,10 @@
     "dev": "next",
     "build": "next build",
     "start": "NODE_ENV=production node server/expressServer.js",
+    "clean": "node sh/clean-dist.js",
     "compile": "npx babel src --out-dir dist",
-    "copy": "sh sh/copy.sh",
-    "package": "npm run compile & npm run copy",
+    "copy": "node sh/copy-dist.js",
+    "package": "npm run clean & npm run compile & npm run copy",
     "publish": "npm publish dist",
     "package-copy-lib": "npx babel lib --out-dir example/standard/node_modules/dossr/lib --copy-files",
     "package-copy-files": "npx babel index.js net.js server.js package.json --out-dir example/standard/node_modules/dossr --copy-files",
@@ -21,7 +22,7 @@
     "url": "git+https://github.com/palmg/dossr.git"
   },
   "keywords": [
-    "palmg, react, nextjs"
+    "palmg", "react", "nextjs", "ssr", "server side render", "support ie6~8"
   ],
   "author": "palmg",
   "license": "MIT",
