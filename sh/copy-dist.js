@@ -8,8 +8,8 @@ function copyRoot() {
     try {
         var curRoot = process.cwd(),
             distWorkDir = path.resolve(curRoot, `./dist/`);
-        // fsExtra.copySync(`${curRoot}/bin/`, `${distWorkDir}/bin/`);
-        // fsExtra.copySync(`${curRoot}/package.json`, `${distWorkDir}/package.json`);
+        fsExtra.copySync(`${curRoot}/bin/`, `${distWorkDir}/bin/`);
+        fsExtra.copySync(`${curRoot}/package.json`, `${distWorkDir}/package.json`);
         ['standard', 'simple', 'with-antd'].forEach(folder => {
             var curExampleDir = path.resolve(curRoot, `./example/${folder}/`);
             fs.readdirSync(curExampleDir).filter(name => !Exclude[name]).forEach(file => {
