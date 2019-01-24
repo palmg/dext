@@ -1,6 +1,6 @@
 {
   "name": "dossr",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "sever side render",
   "main": "./index.js",
   "scripts": {
@@ -11,11 +11,7 @@
     "compile": "npx babel src --out-dir dist",
     "copy": "node sh/copy-dist.js",
     "package": "npm run clean & npm run compile & npm run copy",
-    "publish": "npm publish dist",
-    "package-copy-lib": "npx babel lib --out-dir example/standard/node_modules/dossr/lib --copy-files",
-    "package-copy-files": "npx babel index.js net.js server.js package.json --out-dir example/standard/node_modules/dossr --copy-files",
-    "package-copy": "npm run package-copy-lib & npm run package-copy-files",
-    "package-build": "npm run package & npm run package-copy"
+    "publish": "npm publish dist"
   },
   "repository": {
     "type": "git",
@@ -32,9 +28,9 @@
   "author": "palmg",
   "license": "MIT",
   "bin": {
-    "create-dossr": "./bin/create-app.js",
-    "create-dossr-blank": "./bin/create-blank-app.js",
-    "create-dossr-antd": "./bin/create-antd-app.js"
+    "dossr": "./bin/create-app.js",
+    "dossr-blank": "./bin/create-blank-app.js",
+    "dossr-antd": "./bin/create-antd-app.js"
   },
   "bugs": {
     "url": "https://github.com/palmg/dossr/issues"

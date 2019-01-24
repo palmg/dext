@@ -1,5 +1,3 @@
 #!/usr/bin/env node
-var path = require('path'),
-    fs = require('fs-extra'),
-    create = require('../sh/create');
-create();
+var create = require('../sh/create');
+create('standard');

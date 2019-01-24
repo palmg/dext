@@ -4,7 +4,6 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "dev-server": "node server/expressServer.js",
     "build": "next build",
     "start": "cross-env NODE_ENV=production node server/expressServer.js"
   },
@@ -28,7 +27,6 @@
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "node-sass": "^4.11.0",
