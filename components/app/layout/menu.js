@@ -1,14 +1,14 @@
 import React from 'react'
 import {withRouter} from "next/router";
 import {getMenus} from './menu/db'
-import {Anchor, serverPreload} from '../../../src'
+import {Anchor} from '../../../src'
+import {appPreload} from '../../../src/compInitProps'
 
 const Menu = props => {
-    const {menus} = props,
-        {pathname} = props.router;
+    const {menus} = props;
     return (<ul>
         {menus.map(menu => (
-            <li style={{display:'inline-block', margin:'5px 5px'}} key={menu.key}>
+            <li style={{display: 'inline-block', margin: '5px 5px'}} key={menu.key}>
                 <Anchor href={menu.href}>
                     <a>{menu.name}</a>
                 </Anchor>
@@ -17,4 +17,4 @@ const Menu = props => {
     </ul>);
 };
 
-export default serverPreload('menus', getMenus)(withRouter(Menu))
+export default appPreload(getMenus)(Menu)
