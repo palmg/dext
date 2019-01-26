@@ -7,47 +7,31 @@ import {fingerprint} from './fingerprint'
 function InitPageProps() {
     const _this = this;
     this.pageDict = {};
-    this.executeFoo = async function (Comp, router, req, res) {
+    this.buildFoo = function (Comp, router, req, res) {
         const pathname = router.pathname.replace(/ \//g, ''),
-            methods = _this.pageDict[pathname];
-        console.log(Comp);
-        if (methods) {
-            const initialPropsMethod = Comp.getInitialProps,
-                innerFoo = ()=>{
-
-                };
-            if (initialPropsMethod) {
-
-            } else {
-
+            methods = _this.pageDict[pathname],
+            initialPropsMethod = Comp.getInitialProps,
+            innerFoo = methods ? async () => {
+                const compProps = {};
+                for (let key of keys) {
+                    compProps[key] = await methods(router, req, res);
+                }
+                return {compProps}
+            } : () => {
+                return false
+            };
+        if (initialPropsMethod && innerFoo) {
+            return (cxt) => {
+                const compProps = innerFoo(),
+                    pageProps = initialPropsMethod();
+                return {compProps, pageProps}
             }
+        } else if (!initialPropsMethod && innerFoo) {
+            return innerFoo;
+        } else {
+            return null;
         }
-        // const oriMethod = Component.getInitialProps,
-        //     finger = fingerprint(Component),
-        //     bindMethods = _this.pageDict[finger];
-        // if(bindMethods){
-        //     if (oriMethod) {
-        //         Component.getInitialProps = async function (ctx) {
-        //             const valueDict = {};
-        //             const keys = Object.keys(_this.pageDict);
-        //             for (let method of bindMethods) {
-        //                 valueDict[method.key] = await method.foo(router, req, res);
-        //             }
-        //             const pageProps = oriMethod(ctx)
-        //             return {dossrFlag:1, dossrInitPageProps: valueDict, pageProps};
-        //         }
-        //     } else {
-        //         Component.getInitialProps = async function () {
-        //             const valueDict = {};
-        //             const keys = Object.keys(_this.pageDict);
-        //             for (let method of bindMethods) {
-        //                 valueDict[method.key] = await method.foo(router, req, res);
-        //             }
-        //             return {dossrFlag:1, dossrInitPageProps: valueDict};
-        //         }
-        //     }
-        // }
-    }
+    };
 }
 
 /**

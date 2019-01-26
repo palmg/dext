@@ -20,9 +20,11 @@ class Application extends App {
                 query: router.query //查询内容 {a:'a'}
             }, req = ctx && ctx.req || false,
             res = ctx && ctx.res || false;
-        compProps = await executeCompPreload(Component, route, req, res);
+        Component.getInitialProps = executeCompPreload(Component, route, req, res);
         if (Component.getInitialProps) {
-            pageProps = await Component.getInitialProps(ctx);
+            const ret = await Component.getInitialProps(ctx);
+            compProps = ret.compProps;
+            pageProps = ret.pageProps;
         }
         if (ctx && !ctx.req) {//前端,只有在服务端 ctx.req 和 ctx.res 才存在
             appProps = window.__NEXT_DATA__.props.appProps;
