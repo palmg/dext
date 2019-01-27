@@ -1,11 +1,11 @@
-import net from '../../../src/net'
+import {fetch} from '../../../src/net'
 
 
-export async function loadTvListContext(router, req, res) {
-    return loadTvList(router.query.q)
+export async function loadTvListContext({query}) {
+    return loadTvList(query.q)
 }
 
 export async function loadTvList(q) {
-    const shows = await net(`https://api.tvmaze.com/search/shows?q=${q}`);
+    const shows = await fetch(`https://api.tvmaze.com/search/shows?q=${q}`);
     return {shows}
 };

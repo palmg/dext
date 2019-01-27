@@ -1,2 +1,2 @@
-import net from './lib/util/net'
-export default net
+import fetch from './lib/util/fetch'
+export {fetch}

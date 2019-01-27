@@ -2,7 +2,7 @@ import React from 'react'
 import {withRouter} from "next/router";
 import {getMenus} from './menu/db'
 import {Anchor} from '../../../src'
-import {appPreload} from '../../../src/compInitProps'
+import {appPreload} from '../../../src/initProps'
 
 const Menu = props => {
     const {menus} = props;

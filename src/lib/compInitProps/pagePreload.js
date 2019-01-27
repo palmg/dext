@@ -4,8 +4,14 @@ import {fingerprint} from '../util/fingerprint'
 import ApplicationContext from '../applicationContext'
 
 const initPageProps = new InitPageProps();
-export const executeCompPreload = initPageProps.executeFoo;
+export const executeCompPreload = initPageProps.buildFoo;
 
+/**
+ * 每次页面变更时执行的数据加载方法。
+ * @param path
+ * @param foo
+ * @returns {function(*=): function(*=): *}
+ */
 const pagePreload = (path, foo) => {
     return OriginComp => {
         const key = fingerprint(foo, OriginComp, path);

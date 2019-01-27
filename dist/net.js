@@ -3,11 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+Object.defineProperty(exports, "fetch", {
+  enumerable: true,
+  get: function get() {
+    return _fetch.default;
+  }
+});
 
-var _net = _interopRequireDefault(require("./lib/util/net"));
+var _fetch = _interopRequireDefault(require("./lib/util/fetch"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = _net.default;
-exports.default = _default;

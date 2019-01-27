@@ -5,11 +5,11 @@
 function InitProps() {
     const _this = this;
     this.fooDict = {};
-    this.executeFoo = async function (router, req, res) {
+    this.executeFoo = async function (ctx) {
         const valueDict = {};
         const keys = Object.keys(_this.fooDict);
         for (let key of keys) {
-            valueDict[key] = await _this.fooDict[key](router, req, res);
+            valueDict[key] = await _this.fooDict[key](ctx);
         }
         return valueDict;
     }

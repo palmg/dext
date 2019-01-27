@@ -2,11 +2,10 @@ import React from 'react'
 import {Link, router} from '../../../src'
 import {loadTvListContext} from '../db/tvmaze'
 import Loading from '../../app/layout/loading'
-import {pagePreload} from '../../../src/compInitProps'
-import UrlQueryLocal from '../../../pages/async/urlQueryLocal'
+import {pagePreload} from '../../../src/initProps'
 const DataController = props => (<React.Fragment>
     <p>通过Url的query控制服务端加载</p>
-    {/*<OptionAndData shows={props.shows}/>*/}
+    <OptionAndData shows={props.shows}/>
 </React.Fragment>);
 
 const OptionAndData = router(props => (<React.Fragment>

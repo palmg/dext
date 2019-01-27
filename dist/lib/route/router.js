@@ -53,7 +53,7 @@ var RouteType = {
  * @returns {Function}
  */
 
-var route = function route(OriginComp) {
+var router = function router(OriginComp) {
   var Route =
   /*#__PURE__*/
   function (_React$Component) {
@@ -127,5 +127,5 @@ var route = function route(OriginComp) {
   return (0, _router.withRouter)(Route);
 };
 
-var _default = route;
+var _default = router;
 exports.default = _default;

@@ -21,7 +21,7 @@ const RouteType = {
  * @param OriginComp {React.Component} 子组件
  * @returns {Function}
  */
-const route = OriginComp => {
+const router = OriginComp => {
     class Route extends React.Component {
         state = {pageRoute: false, localRoute: false};
 
@@ -56,4 +56,4 @@ const route = OriginComp => {
     return withRouter(Route)
 };
 
-export default route
+export default router

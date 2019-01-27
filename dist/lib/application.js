@@ -13,7 +13,9 @@ var _app = _interopRequireDefault(require("next/app"));
 
 var _applicationContext = _interopRequireDefault(require("./applicationContext"));
 
-var _serverInitProps = require("./util/serverInitProps");
+var _appPreload = require("./compInitProps/appPreload");
+
+var _pagePreload = require("./compInitProps/pagePreload");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,13 +57,33 @@ function (_App) {
 
     return _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Application)).call.apply(_getPrototypeOf2, [this].concat(props)));
   }
+  /**
+   * 页面在进行真实渲染之前执行预处理数据的方法。
+   * 1）服务端打开页面时候一定会渲染一次。
+   * 2）前端首次打开时不会执行，后面每次切换内页都会执一次。
+   * @param Component {React.Component} 当前页面在 ./pages/下的文件组件实例
+   * @param router {Object} Nextjs自定义的路由对象。
+   * @param router.asPath {String} 页面切换之前的地址，比如从/切换到/about这里就是/。当设置Link的asPath属性时这里显示的asPath指向的路径
+   * @param router.pathname {String} 与asPath类似，但是记录的是真实路径。
+   * @param ctx {Object} Nextjs定义的整个app的上下文，在客户端之后asPath、pathname和query3个属性，在服务端会有res和req。
+   * @param router.asPath {String} 和router.asPath类似，但是显示的是切换之后的地址。
+   * @param router.pathname {String} 与router.pathname类似。
+   * @param router.query {String} URL上的查询参数，比如?q=abc, router.query={q:'abc'}。
+   * @returns {Promise<{pageProps, appProps: *, compProps}>}
+   */
+
 
   _createClass(Application, [{
     key: "render",
     value: function render(children) {
-      var appProps = this.props.appProps;
+      var _this$props = this.props,
+          appProps = _this$props.appProps,
+          compProps = _this$props.compProps;
       return _react.default.createElement(_applicationContext.default.Provider, {
-        value: appProps
+        value: {
+          appProps: appProps,
+          compProps: compProps
+        }
       }, children);
     }
   }], [{
@@ -70,54 +92,55 @@ function (_App) {
       var _getInitialProps = _asyncToGenerator(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee(_ref) {
-        var Component, router, ctx, pageProps, appProps;
+        var Component, router, ctx, pageProps, appProps, compProps, getInitialProps, ret;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 Component = _ref.Component, router = _ref.router, ctx = _ref.ctx;
+                pageProps = {}, appProps = {}, compProps = {};
+                getInitialProps = (0, _pagePreload.executeCompPreload)(Component, ctx);
 
-                /**
-                 * app的getInitialProps会在服务端被调用一次，在前端每次切换页面时被调用。
-                 */
-                pageProps = {}, appProps = {};
-
-                if (!Component.getInitialProps) {
-                  _context.next = 6;
+                if (!getInitialProps) {
+                  _context.next = 9;
                   break;
                 }
 
-                _context.next = 5;
-                return Component.getInitialProps(ctx);
-
-              case 5:
-                pageProps = _context.sent;
+                _context.next = 6;
+                return getInitialProps(ctx);
 
               case 6:
+                ret = _context.sent;
+                compProps = ret.compProps;
+                pageProps = ret.pageProps;
+
+              case 9:
                 if (!(ctx && !ctx.req)) {
-                  _context.next = 10;
+                  _context.next = 13;
                   break;
                 }
 
                 //前端,只有在服务端 ctx.req 和 ctx.res 才存在
-                appProps = window.__NEXT_DATA__.props.appProps;
-                _context.next = 13;
+                appProps = window.__NEXT_DATA__.props.appProps; //从页面上获取参数，__NEXT_DATA__就是nextjs渲染的异步数据
+
+                _context.next = 16;
                 break;
 
-              case 10:
-                _context.next = 12;
-                return (0, _serverInitProps.executeAsyncFoo)();
+              case 13:
+                _context.next = 15;
+                return (0, _appPreload.executeAppPreload)(ctx);
 
-              case 12:
+              case 15:
                 appProps = _context.sent;
 
-              case 13:
+              case 16:
                 return _context.abrupt("return", {
                   pageProps: pageProps,
-                  appProps: appProps
+                  appProps: appProps,
+                  compProps: compProps
                 });
 
-              case 14:
+              case 17:
               case "end":
                 return _context.stop();
             }

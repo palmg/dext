@@ -9,27 +9,32 @@ class Application extends App {
         super(...props);
     }
 
+    /**
+     * 页面在进行真实渲染之前执行预处理数据的方法。
+     * 1）服务端打开页面时候一定会渲染一次。
+     * 2）前端首次打开时不会执行，后面每次切换内页都会执一次。
+     * @param Component {React.Component} 当前页面在 ./pages/下的文件组件实例
+     * @param router {Object} Nextjs自定义的路由对象。
+     * @param router.asPath {String} 页面切换之前的地址，比如从/切换到/about这里就是/。当设置Link的asPath属性时这里显示的asPath指向的路径
+     * @param router.pathname {String} 与asPath类似，但是记录的是真实路径。
+     * @param ctx {Object} Nextjs定义的整个app的上下文，在客户端之后asPath、pathname和query3个属性，在服务端会有res和req。
+     * @param router.asPath {String} 和router.asPath类似，但是显示的是切换之后的地址。
+     * @param router.pathname {String} 与router.pathname类似。
+     * @param router.query {String} URL上的查询参数，比如?q=abc, router.query={q:'abc'}。
+     * @returns {Promise<{pageProps, appProps: *, compProps}>}
+     */
     static async getInitialProps({Component, router, ctx}) {
-        /**
-         * app的getInitialProps会在服务端被调用一次，在前端每次切换页面时被调用。
-         */
         let pageProps = {}, appProps = {}, compProps = {};
-        const route = {
-                url: router.asPath, //全路径 abc/d?q=a
-                pathname: router.route, //文档路径 abc/d
-                query: router.query //查询内容 {a:'a'}
-            }, req = ctx && ctx.req || false,
-            res = ctx && ctx.res || false;
-        Component.getInitialProps = executeCompPreload(Component, route, req, res);
-        if (Component.getInitialProps) {
-            const ret = await Component.getInitialProps(ctx);
+        const getInitialProps = executeCompPreload(Component, ctx);
+        if (getInitialProps) {
+            const ret = await getInitialProps(ctx);
             compProps = ret.compProps;
             pageProps = ret.pageProps;
         }
         if (ctx && !ctx.req) {//前端,只有在服务端 ctx.req 和 ctx.res 才存在
-            appProps = window.__NEXT_DATA__.props.appProps;
+            appProps = window.__NEXT_DATA__.props.appProps;//从页面上获取参数，__NEXT_DATA__就是nextjs渲染的异步数据
         } else {//服务端
-            appProps = await executeAppPreload(route, req, res);
+            appProps = await executeAppPreload(ctx);
         }
         return {pageProps, appProps, compProps};
     }

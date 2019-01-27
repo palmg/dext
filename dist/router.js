@@ -5,9 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _routing = _interopRequireDefault(require("./route/routing"));
+var _router = _interopRequireDefault(require("./lib/route/router"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = _routing.default;
+var _default = _router.default;
 exports.default = _default;
