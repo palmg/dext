@@ -15,23 +15,33 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+var regComp;
 /**
- *
+ * InitPageProps用于管理指定页面加载的时候向组件提供数据。组件分为2类方法：注册，执行
  * @constructor 默认构造 new InitPageProps()
  */
+
 function InitPageProps() {
   var _this = this;
   /**
    *
-   * @type {Object} [{key, foo}]
+   * @type {Object} {fingerprint(Comp): [{key, foo}]}}
    */
 
 
-  this.pageDict = {};
+  this.compDict = {};
+  /**
+   * @type {Object} {pathname: [{key, foo}]}}
+   */
+
+  this.pathDict = {};
 
   this.buildFoo = function (Component, ctx) {
-    var path = ctx.pathname.replace(/ \//g, ''),
-        methods = _this.pageDict[path],
+    var path = InitPageProps.replaceUrl(ctx.pathname);
+
+    _this.prePath2CompDict(Component, path);
+
+    var methods = _this.compDict[(0, _fingerprint.fingerprint)(Component)],
         pageMethod = Component.getInitialProps,
         compMethod = methods ?
     /*#__PURE__*/
@@ -119,9 +129,38 @@ function InitPageProps() {
         return _ref.apply(this, arguments);
       };
     }() : false;
+
     return InitPageProps.buildPagePropsMethod(pageMethod, compMethod);
   };
 }
+/**
+ * 对Path进行前置处理转换，将所有的页面路由方法绑定到compDict上。
+ */
+
+
+InitPageProps.prototype.prePath2CompDict = function (component, path) {
+  var pathMethods = this.pathDict[path],
+      finger = (0, _fingerprint.fingerprint)(component);
+
+  if (pathMethods) {
+    var compMethods = this.compDict[finger];
+
+    if (compMethods) {
+      this.compDict[finger] = compMethods.concat(pathMethods);
+    } else {
+      this.compDict[finger] = pathMethods;
+    }
+
+    delete this.pathDict[path];
+  }
+};
+/**
+ * 返回一个通用方法。
+ * @param pageMethod
+ * @param compMethod
+ * @return {*}
+ */
+
 
 InitPageProps.buildPagePropsMethod = function (pageMethod, compMethod) {
   var ret =
@@ -191,41 +230,94 @@ InitPageProps.buildPagePropsMethod = function (pageMethod, compMethod) {
   }();
 
   return !pageMethod && !compMethod ? null : ret;
-};
+}; //===================================注册方法=======================================================
+
 /**
  *
- * @param path 要绑定的页面组件路径
+ * @param register {Function|String} 绑定组件页面url路径，或一个注册组件的方法。(register)=>{register(
+ *   require.ensure([], require => {
+ *       call(require('../../../pages/async/urlQueryLocal'))
+ *   })
+ * )}
  * @param key
  * @param foo
  */
 
 
-InitPageProps.prototype.registerFoo = function (path, key, _foo) {
-  path = path.replace(/ \//g, '');
+InitPageProps.prototype.register = function (register, key, foo) {
+  var _foo = this.wrapperPromise(foo);
 
-  if ('function' === typeof _foo) {//TODO
-  } else if (Promise.prototype[Symbol.toStringTag] === _foo.constructor.prototype[Symbol.toStringTag]) {
-    //直接注入一个promise
-    _foo = function foo() {
-      return _foo;
-    };
+  if ('string' === typeof register) {
+    this.registerPath(register, key, foo);
+  } else if ('function' === typeof register) {
+    this.registerFunction(register, key, _foo);
   } else {
-    throw "Typeof ".concat(_foo.toString(), " is unsupported!");
+    throw "Type Error! Register Access String and Function!";
   }
+};
 
-  var _methodList = this.pageDict[path];
+InitPageProps.prototype.registerPath = function (path, key, foo) {
+  var pathname = InitPageProps.replaceUrl(path),
+      _methods = this.pathDict[pathname];
 
-  if (_methodList) {
-    _methodList.push({
+  if (_methods) {
+    _methods.push({
       key: key,
-      foo: _foo
+      foo: foo
     });
   } else {
-    this.pageDict[path] = [{
+    this.pathDict[pathname] = [{
       key: key,
-      foo: _foo
+      foo: foo
     }];
   }
+};
+
+InitPageProps.prototype.registerFunction = function (register, key, foo) {
+  var _this2 = this;
+
+  var _this = this,
+      _foo = _this.wrapperPromise(foo);
+
+  register(function (Comp) {
+    //Comp是对象
+    var Component = Comp.default ? Comp.default : Comp;
+
+    var _methods = _this.compDict[(0, _fingerprint.fingerprint)(Component)];
+
+    if (_methods) {
+      _methods.push({
+        key: key,
+        foo: _foo
+      });
+    } else {
+      _this2.compDict[(0, _fingerprint.fingerprint)(Component)] = [{
+        key: key,
+        foo: _foo
+      }];
+    }
+  });
+};
+/**
+ * 如果传入的是一个promise，使用方法包装
+ * @param foo
+ * @return {function(): *}
+ */
+
+
+InitPageProps.prototype.wrapperPromise = function (foo) {
+  if (Promise.prototype[Symbol.toStringTag] === foo.constructor.prototype[Symbol.toStringTag]) {
+    return function () {
+      return foo;
+    };
+  } else {
+    return foo;
+  }
+}; //========================tool
+
+
+InitPageProps.replaceUrl = function (url) {
+  return url.replace(/ |\//g, '');
 };
 
 var _default = InitPageProps;

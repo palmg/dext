@@ -78,13 +78,14 @@ function (_App) {
     value: function render(children) {
       var _this$props = this.props,
           appProps = _this$props.appProps,
-          compProps = _this$props.compProps;
+          compProps = _this$props.compProps,
+          Component = _this$props.Component;
       return _react.default.createElement(_applicationContext.default.Provider, {
         value: {
           appProps: appProps,
           compProps: compProps
         }
-      }, children);
+      }, children || _react.default.createElement(Component, null));
     }
   }], [{
     key: "getInitialProps",

@@ -40,10 +40,10 @@ class Application extends App {
     }
 
     render(children) {
-        const {appProps, compProps} = this.props;
+        const {appProps, compProps, Component} = this.props;
         return (
             <ApplicationContext.Provider value={{appProps, compProps}}>
-                {children}
+                {children || (<Component />)}
             </ApplicationContext.Provider>
         );
     }

@@ -19,17 +19,21 @@ var initPageProps = new _initPageProps.default();
 var executeCompPreload = initPageProps.buildFoo;
 /**
  * 每次页面变更时执行的数据加载方法。
- * @param path
+ * @param register {Function|String} 一个页面的url路径或者一个注册组件的方法。(register)=>{register(
+ *   require.ensure([], require => {
+ *       call(require('../../../pages/async/urlQueryLocal'))
+ *   })
+ * )}
  * @param foo
  * @returns {function(*=): function(*=): *}
  */
 
 exports.executeCompPreload = executeCompPreload;
 
-var pagePreload = function pagePreload(path, foo) {
+var pagePreload = function pagePreload(register, foo) {
   return function (OriginComp) {
-    var key = (0, _fingerprint.fingerprint)(foo, OriginComp, path);
-    initPageProps.registerFoo(path, key, foo);
+    var key = (0, _fingerprint.fingerprint)(foo, OriginComp, register);
+    initPageProps.register(register, key, foo);
     return function (props) {
       return _react.default.createElement(_applicationContext.default.Consumer, null, function (value) {
         var params = Object.assign({}, props, value['compProps'][key]);
