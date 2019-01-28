@@ -1,12 +1,26 @@
 import React from 'react'
-import DataController from '../../components/async/urlQueryLocal/dataController'
+import TvDataController from '../../components/async/urlQueryLocal/tvDataController'
+import LocalDataController from '../../components/async/urlQueryLocal/localDataController'
+
 const DemoList = props => (<React.Fragment>
-    <DataController />
+    <LocalDataController/>
+    <hr/>
+    <TvDataController/>
 </React.Fragment>);
 
-// DemoList.getInitialProps = async ({req, query}) => {
-//     console.log(query);
-//     return {shows: ''}
-// };
+//DemoList.prototype[Symbol.toStringTag] = 'urlQueryLocal_DemoList';
+
+class Demo extends React.Component {
+    get [Symbol.toStringTag]() {
+        return 'urlQueryLocal_DemoList';
+    }
+
+    render() {
+        return (<React.Fragment>
+            <TvDataController/>
+            <LocalDataController/>
+        </React.Fragment>);
+    }
+}
 
 export default DemoList

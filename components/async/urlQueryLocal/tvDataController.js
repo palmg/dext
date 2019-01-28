@@ -3,7 +3,7 @@ import {Link, router} from '../../../src'
 import {loadTvListContext} from '../db/tvmaze'
 import Loading from '../../app/layout/loading'
 import {pagePreload} from '../../../src/initProps'
-const DataController = props => (<React.Fragment>
+const TvDataController = props => (<React.Fragment>
     <p>通过Url的query控制服务端加载</p>
     <OptionAndData shows={props.shows}/>
 </React.Fragment>);
@@ -25,4 +25,4 @@ const Bar = props => {
     </div>)
 }
 
-export default pagePreload('/async/urlQueryLocal', loadTvListContext)(DataController)
+export default pagePreload('/async/urlQueryLocal', loadTvListContext)(TvDataController)
