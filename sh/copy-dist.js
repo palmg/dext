@@ -2,7 +2,7 @@
 var path = require('path'),
     fs = require('fs'),
     fsExtra = require('fs-extra'),
-    Exclude = {'dist': 1, '.idea': 1, 'node_modules': 1, 'package-lock.json': 1};
+    Exclude = {'dist': 1, '.idea': 1, 'node_modules': 1, 'package-lock.json': 1, '.next': 1};
 
 function copyRoot() {
     try {
