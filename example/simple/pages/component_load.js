@@ -1,7 +1,7 @@
 import React from 'react'
-import Menus from '../component/menus'
-import PathLoad from '../component/pathLoad'
-import CompLoad from '../component/compLoad'
+import Menus from '../components/menus'
+import PathLoad from '../components/pathLoad'
+import CompLoad from '../components/compLoad'
 
 /**
  * 内页组件包装了一个组件，在组件中会装载数据。
