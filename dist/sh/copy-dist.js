@@ -8,11 +8,9 @@ function copyRoot() {
     try {
         var curRoot = process.cwd(),
             distWorkDir = path.resolve(curRoot, `./dist`);
-        console.log('root:', curRoot);
-        console.log('dist:', distWorkDir);
         fsExtra.copySync(`${curRoot}/bin`, `${distWorkDir}/bin`);
         fsExtra.copySync(`${curRoot}/package.json`, `${distWorkDir}/package.json`);
-        fsExtra.copySync(`${curRoot}/sh/`, `${distWorkDir}/sh/`);
+        fsExtra.copySync(`${curRoot}/sh/`, `${distWorkDir}/sh`);
         ['standard', 'simple', 'with-antd'].forEach(folder => {
             var curExampleDir = path.resolve(curRoot, `./example/${folder}/`);
             fs.readdirSync(curExampleDir).filter(name => !Exclude[name]).forEach(file => {
