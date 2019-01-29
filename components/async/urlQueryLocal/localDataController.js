@@ -1,7 +1,9 @@
 import React from 'react'
 import {pagePreload} from '../../../src/initProps'
 
-const LocalDataController = props => (<div>{props.view}</div>);
+const LocalDataController = props => {
+    return (<div>{props.view}</div>);
+}
 
 export default pagePreload(cb => {
     require.ensure([], require => {

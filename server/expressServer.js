@@ -28,4 +28,4 @@ const server = (middlewares = [], port = 3000) => {
         process.exit(1)
     });
 };
-server(middleware);
+server(middleware, 3001);
