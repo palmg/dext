@@ -21,7 +21,7 @@ var fingerprint = function fingerprint() {
   step < 7 && (step = 7);
 
   for (var i = 0; FingerLength > i; i++) {
-    retStr += _str.charAt(i * step % len);
+    retStr += _str.charAt(i * step % strLen);
   }
 
   return retStr;

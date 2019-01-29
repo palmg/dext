@@ -1,6 +1,6 @@
 {
   "name": "dossr",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "sever side render",
   "main": "./index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/palmg/dossr.git"
+    "url": "git+https://github.com/palmg/dossr/tree/master/dist.git"
   },
   "keywords": [
     "palmg",
@@ -28,9 +28,7 @@
   "author": "palmg",
   "license": "MIT",
   "bin": {
-    "dossr": "./bin/create-app.js",
-    "dossr-blank": "./bin/create-blank-app.js",
-    "dossr-antd": "./bin/create-antd-app.js"
+    "dossr": "./bin/dossr.js"
   },
   "bugs": {
     "url": "https://github.com/palmg/dossr/issues"
@@ -47,7 +45,8 @@
     "ua-parser-js": "^0.7.19"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3"
+    "@babel/cli": "^7.2.3",
+    "cross-env": "^5.2.0"
   },
   "peerDependencies": {
     "next": "^7.0.0",

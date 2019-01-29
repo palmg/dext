@@ -1,6 +1,6 @@
 {
   "name": "dossr",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "sever side render",
   "main": "./index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/palmg/dossr.git"
+    "url": "git+https://github.com/palmg/dossr/tree/master/dist.git"
   },
   "keywords": [
     "palmg",
@@ -28,7 +28,7 @@
   "author": "palmg",
   "license": "MIT",
   "bin": {
-    "dossr": "dossr"
+    "dossr": "./bin/dossr.js"
   },
   "bugs": {
     "url": "https://github.com/palmg/dossr/issues"

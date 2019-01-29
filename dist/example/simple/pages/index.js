@@ -1,7 +1,6 @@
 import React from 'react'
-import Menus from '../component/menus'
+import HomeContent from '../components/home/homeContent'
 
-export default props => (<div>
-    <Menus/>
-    <h2>Home</h2>
-</div>)
+const Index = props =>(<div><h1>首页</h1><HomeContent/></div>);
+
+export default Index

@@ -4,7 +4,7 @@ var path = require('path'),
 
 /**
  * 创建模板项目
- * @param type {String} 项目类型 [standard|simple|with-antd]
+ * @param type {String} 项目类型 [standard|simple|antd]
  */
 function create(type = 'standard') {
     var ssrDir = path.resolve(__dirname, '..', 'example', type);

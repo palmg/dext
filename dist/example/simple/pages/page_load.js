@@ -1,5 +1,5 @@
 import React from 'react'
-import Menus from '../component/menus'
+import Menus from '../components/menus'
 
 const PageLoad = props => {
     console.log(props);
