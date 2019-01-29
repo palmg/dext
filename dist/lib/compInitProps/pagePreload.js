@@ -11,7 +11,7 @@ var _initPageProps = _interopRequireDefault(require("../util/initPageProps"));
 
 var _fingerprint = require("../util/fingerprint");
 
-var _applicationContext = _interopRequireDefault(require("../applicationContext"));
+var _applicationContext = require("../applicationContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35,7 +35,7 @@ var pagePreload = function pagePreload(register, foo) {
     var key = (0, _fingerprint.fingerprint)(foo, OriginComp, register);
     initPageProps.register(register, key, foo);
     return function (props) {
-      return _react.default.createElement(_applicationContext.default.Consumer, null, function (value) {
+      return _react.default.createElement(_applicationContext.Consumer, null, function (value) {
         var params = Object.assign({}, props, value['compProps'][key]);
         return _react.default.createElement(OriginComp, params);
       });

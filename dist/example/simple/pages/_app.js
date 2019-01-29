@@ -1,6 +1,2 @@
 import {App} from 'dossr'
-export default class _App extends App{
-    render(){
-        super
-    }
-}
+export default class _App extends App{}

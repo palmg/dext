@@ -11,7 +11,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _app = _interopRequireDefault(require("next/app"));
 
-var _applicationContext = _interopRequireDefault(require("./applicationContext"));
+var _applicationContext = require("./applicationContext");
 
 var _appPreload = require("./compInitProps/appPreload");
 
@@ -66,26 +66,27 @@ function (_App) {
    * @param router.asPath {String} 页面切换之前的地址，比如从/切换到/about这里就是/。当设置Link的asPath属性时这里显示的asPath指向的路径
    * @param router.pathname {String} 与asPath类似，但是记录的是真实路径。
    * @param ctx {Object} Nextjs定义的整个app的上下文，在客户端之后asPath、pathname和query3个属性，在服务端会有res和req。
-   * @param router.asPath {String} 和router.asPath类似，但是显示的是切换之后的地址。
-   * @param router.pathname {String} 与router.pathname类似。
-   * @param router.query {String} URL上的查询参数，比如?q=abc, router.query={q:'abc'}。
+   * @param ctx.asPath {String} 和router.asPath类似，但是显示的是切换之后的地址。
+   * @param ctx.pathname {String} 与router.pathname类似。
+   * @param ctx.query {String} URL上的查询参数，比如?q=abc, router.query={q:'abc'}。
    * @returns {Promise<{pageProps, appProps: *, compProps}>}
    */
 
 
   _createClass(Application, [{
     key: "render",
-    value: function render(children) {
+    value: function render() {
       var _this$props = this.props,
           appProps = _this$props.appProps,
           compProps = _this$props.compProps,
-          Component = _this$props.Component;
-      return _react.default.createElement(_applicationContext.default.Provider, {
+          Component = _this$props.Component,
+          pageProps = _this$props.pageProps;
+      return _react.default.createElement(_applicationContext.Provider, {
         value: {
           appProps: appProps,
           compProps: compProps
         }
-      }, children || _react.default.createElement(Component, null));
+      }, _react.default.createElement(Component, pageProps));
     }
   }], [{
     key: "getInitialProps",

@@ -1,4 +1,7 @@
 import React from 'react'
-export default props =>(<div>
-    <div>Home123</div>
+import Menus from '../component/menus'
+
+export default props => (<div>
+    <Menus/>
+    <h2>Home</h2>
 </div>)

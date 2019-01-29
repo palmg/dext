@@ -1,6 +1,6 @@
 import React from 'react'
 import App from 'next/app'
-import ApplicationContext from './applicationContext'
+import {Provider} from './applicationContext'
 import {executeAppPreload} from "./compInitProps/appPreload";
 import {executeCompPreload} from "./compInitProps/pagePreload";
 
@@ -39,12 +39,12 @@ class Application extends App {
         return {pageProps, appProps, compProps};
     }
 
-    render(children) {
-        const {appProps, compProps, Component} = this.props;
+    render() {
+        const {appProps, compProps, Component, pageProps} = this.props;
         return (
-            <ApplicationContext.Provider value={{appProps, compProps}}>
-                {children || (<Component />)}
-            </ApplicationContext.Provider>
+            <Provider value={{appProps, compProps}}>
+                <Component {...pageProps} />
+            </Provider>
         );
     }
 }

@@ -9,6 +9,12 @@ Object.defineProperty(exports, "App", {
     return _application.default;
   }
 });
+Object.defineProperty(exports, "Context", {
+  enumerable: true,
+  get: function get() {
+    return _applicationContext.default;
+  }
+});
 Object.defineProperty(exports, "Head", {
   enumerable: true,
   get: function get() {
@@ -47,6 +53,8 @@ Object.defineProperty(exports, "Anchor", {
 });
 
 var _application = _interopRequireDefault(require("./lib/application"));
+
+var _applicationContext = _interopRequireDefault(require("./lib/applicationContext"));
 
 var _head = _interopRequireDefault(require("next/head"));
 

@@ -1,6 +1,6 @@
 {
   "name": "dossr",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "sever side render",
   "main": "./index.js",
   "scripts": {

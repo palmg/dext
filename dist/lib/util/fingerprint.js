@@ -4,8 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.fingerprint = void 0;
-var FingerLength = 8,
-    M = 7;
+var FingerLength = 8;
 
 var fingerprint = function fingerprint() {
   for (var _len = arguments.length, foos = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -15,12 +14,14 @@ var fingerprint = function fingerprint() {
   var _str = foos.map(function (foo) {
     return toString(foo);
   }).toString(),
-      len = _str.length;
+      strLen = _str.length;
 
-  var retStr = '';
+  var step = Math.round(strLen / FingerLength),
+      retStr = '';
+  step < 7 && (step = 7);
 
   for (var i = 0; FingerLength > i; i++) {
-    retStr += _str.charAt(i * 7 % len);
+    retStr += _str.charAt(i * step % len);
   }
 
   return retStr;
@@ -29,5 +30,5 @@ var fingerprint = function fingerprint() {
 exports.fingerprint = fingerprint;
 
 var toString = function toString(foo) {
-  return foo.toString().replace(/^function|\n|\(|\)|\[|\]|\{|\}|\,|;|\.|\\|_|:|\/|"|'|-|=| /g, '');
+  return foo.toString().replace(/^function|\n|\(|\)|\[|\]|\{|\}|\,|;|\.|\\|_|:|\/|"|'|-|=|\*|!| /g, '');
 };

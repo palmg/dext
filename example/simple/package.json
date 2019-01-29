@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/palmg/dossr#readme",
   "dependencies": {
-    "dossr": "^0.0.10",
+    "dossr": "^0.0.11",
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
