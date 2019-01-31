@@ -7,7 +7,7 @@ import {pagePreload} from 'dossr/initProps'
  * @return {*}
  * @constructor
  */
-const PathLoad = props => (<p><span>组件1 : </span>{props.data}</p>);
+const PathLoad = props => (<p><span>组件1 : </span>{props.pathLoad}</p>);
 /**
  * 用高阶组件pagePreload包装一个异步加载过程。
  * pagePreload接收2个参数path{String}、call{Function}
@@ -15,8 +15,8 @@ const PathLoad = props => (<p><span>组件1 : </span>{props.data}</p>);
  * call中的执行需要返回一个promise
  */
 export default pagePreload('/component_load', async () => {
-    const data = await new Promise((resolve, reject) => {
-        resolve('通过url路径绑定异步加载数据。请打开"./components/pathLoad.js"了解详情。')
+    const pathLoad = await new Promise((resolve, reject) => {
+        resolve('通过url路径绑定异步加载数据。详见"./components/pathLoad.js"。')
     });
-    return {data}
+    return {pathLoad}
 })(PathLoad)

@@ -2,7 +2,6 @@ import React from 'react'
 import Menus from '../components/menus'
 
 const PageLoad = props => {
-    console.log(props);
     return (<div>
         <Menus/>
         <h2>Page_Load</h2>
