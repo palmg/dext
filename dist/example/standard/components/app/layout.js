@@ -12,16 +12,16 @@ class Layout extends React.Component {
     render() {
         const {props} = this, {route} = props;
         return (<React.Fragment>
-            <header style={{height: '46px'}}>
-                <Menu/>
-            </header>
-            <section style={{position: 'relative', padding: '50px'}}>
-                {route.isPageRoute ? (<Loading/>) : this.props.children}
-            </section>
-            <footer style={{textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)'}}>
-                模板案例
-            </footer>
-        </React.Fragment>);
+                <header style={{height: '46px'}}>
+                    <Menu/>
+                </header>
+                <section style={{position: 'relative', padding: '20px 45px'}}>
+                    {route.isPageRoute ? (<Loading/>) : this.props.children}
+                </section>
+                <footer style={{textAlign: 'center', background: '#001529', color: 'rgba(255, 255, 255, 0.65)'}}>
+                    模板案例
+                </footer>
+            </React.Fragment>);
     }
 }
 

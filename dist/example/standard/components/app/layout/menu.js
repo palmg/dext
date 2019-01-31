@@ -1,21 +1,22 @@
 import React from 'react'
 import {withRouter} from "next/router";
 import {getMenus} from './menu/db'
-import {Anchor, serverPreload} from 'dossr'
-const cn = require('classnames/bind').bind(require('./menus.scss'));
+import {Anchor} from 'dossr'
+import {appPreload} from 'dossr/initProps'
 
 const Menu = props => {
-    const {menus} = props,
-        {pathname} = props.router;
+    const {menus} = props;
     return (<ul>
-        {menus.map(menu => (
-            <li className={cn('li')} key={menu.key}>
-                <Anchor href={menu.href}>
-                    <a>{menu.name}</a>
-                </Anchor>
-            </li>
-        ))}
+        {menus.map(menu => {
+            return (
+                <li style={{display: 'inline-block', margin: '5px 5px'}} key={menu.key}>
+                    <Anchor href={menu.href}>
+                        <a>{menu.name}</a>
+                    </Anchor>
+                </li>
+            )
+        })}
     </ul>);
 };
 
-export default serverPreload('menus', getMenus)(withRouter(Menu))
+export default appPreload(getMenus)(Menu)

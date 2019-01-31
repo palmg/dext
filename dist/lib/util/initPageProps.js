@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _fingerprint = require("./fingerprint");
-
 var _signatureClass = require("../util/signatureClass");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -17,12 +15,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var regComp;
 /**
  * InitPageProps用于管理指定页面加载的时候向组件提供数据。组件分为2类方法：注册，执行
  * @constructor 默认构造 new InitPageProps()
  */
-
 function InitPageProps() {
   var _this = this;
   /**
@@ -229,8 +225,6 @@ InitPageProps.buildPagePropsMethod = function (pageMethod, compMethod) {
 
 InitPageProps.prototype.register = function (register, foo) {
   var _foo = this.wrapperPromise(foo);
-
-  console.log(register);
 
   if ('string' === typeof register) {
     register.match(/\//) ? this.registerPath(register, foo) : this.registerSignature(register, foo);

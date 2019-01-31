@@ -1,8 +1,4 @@
-import {fingerprint} from './fingerprint'
 import {getClassSignature} from '../util/signatureClass'
-
-let regComp;
-
 /**
  * InitPageProps用于管理指定页面加载的时候向组件提供数据。组件分为2类方法：注册，执行
  * @constructor 默认构造 new InitPageProps()
@@ -68,7 +64,6 @@ InitPageProps.buildPagePropsMethod = function (pageMethod, compMethod) {
  */
 InitPageProps.prototype.register = function (register, foo) {
     const _foo = this.wrapperPromise(foo);
-    console.log(register);
     if ('string' === typeof register) {
         register.match(/\//) ? this.registerPath(register, foo) : this.registerSignature(register, foo);
     } else if ('function' === typeof register) {
@@ -124,7 +119,7 @@ InitPageProps.prototype.wrapperPromise = function (foo) {
 //========================tool
 InitPageProps.replaceUrl = function (url) {
     return url.replace(/ |\//g, '');
-}
+};
 
 
 export default InitPageProps

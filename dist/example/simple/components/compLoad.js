@@ -8,7 +8,7 @@ import {pagePreload} from 'dossr/initProps'
  * @constructor
  */
 const CompLoad = props => {
-    return (<p><span>组件2 : </span>{props.data}</p>);
+    return (<p><span>组件2 : </span>{props.compLoad}</p>);
 };
 
 /**
@@ -25,8 +25,8 @@ export default pagePreload(cb=>{
         cb(require('../pages/component_load'))
     })
 }, async () => {
-    const data = await new Promise((resolve, reject) => {
-        resolve('通过页面组件绑定异步加载数据。请打开"./components/compLoad.js"了解详情。')
+    const compLoad = await new Promise((resolve, reject) => {
+        resolve('通过页面组件绑定异步加载数据。详见"./components/compLoad.js"。')
     });
-    return {data}
+    return {compLoad}
 })(CompLoad)

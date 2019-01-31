@@ -1,5 +1,5 @@
 {
-  "name": "dossr-standard-example",
+  "name": "dossr-simple-example",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/palmg/dossr#readme",
   "dependencies": {
-    "dossr": "^0.0.16",
+    "dossr": "latest",
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"

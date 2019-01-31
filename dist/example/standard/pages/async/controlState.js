@@ -1,5 +1,5 @@
 import React from 'react'
-import {loadTvList} from '../../components/async/standard/db'
+import {loadTvList} from '../../components/async/db/tvmaze'
 
 class DemoList extends React.Component {
     constructor(...props) {
@@ -15,14 +15,11 @@ class DemoList extends React.Component {
      */
     static async getInitialProps({req, query}) {
         const isServer = !!req; //这是一个在管理案例中写的判断是否为服务器运行的方法
-        const data = await loadTvList('batman');
-        return {
-            shows: data
-        }
+        return await loadTvList('batman');
     }
 
     setData(shows) {
-        this.setState({shows})
+        this.setState(shows)
     }
 
     handleClick(e) {
@@ -37,7 +34,7 @@ class DemoList extends React.Component {
                 <button onClick={this.handleClick}>child</button>
                 <button onClick={this.handleClick}>lahn</button>
             </div>
-            {this.state.shows.map(i => (<p key={i.show.id}>>{i.show.name}</p>))}
+            {this.state.shows.map(i => (<p key={i.show.id}>{i.show.name}</p>))}
         </React.Fragment>)
     }
 }

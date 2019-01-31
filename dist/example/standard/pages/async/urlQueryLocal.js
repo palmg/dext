@@ -1,32 +1,27 @@
 import React from 'react'
-import {Link, router} from 'dossr'
-import {loadTvList} from '../../components/async/standard/db'
-import Loading from '../../components/app/layout/loading'
+import {signature} from 'dossr/initProps'
+import TvDataController from '../../components/async/urlQueryLocal/tvDataController'
+import LocalDataController from '../../components/async/urlQueryLocal/localDataController'
 
-const DemoList = props => (<React.Fragment>
-    <p>通过Url的query控制服务端加载</p>
-    <OptionAndData shows={props.shows}/>
-</React.Fragment>);
+const DemoList = signature('urlQueryLocal', props => (<React.Fragment>
+    <LocalDataController/>
+    <hr/>
+    <TvDataController/>
+</React.Fragment>));
 
-const OptionAndData = router(props => (<React.Fragment>
-    <Bar route={props.route}/>
-    {props.shows.map(i => (<p key={i.show.id}>{i.show.name}</p>))}
-    {props.route.isLocalRoute && (<Loading/>)}
-</React.Fragment>))
+//DemoList.prototype[Symbol.toStringTag] = 'urlQueryLocal_DemoList';
 
+class Demo extends React.Component {
+    get [Symbol.toStringTag]() {
+        return 'urlQueryLocal_DemoList';
+    }
 
-DemoList.getInitialProps = async ({req, query}) => {
-    const data = await loadTvList(query.q);
-    return {shows: data}
-};
-
-const Bar = props => {
-    const {pathname} = props.route;
-    return (<div>
-        <button><Link href={`${pathname}?q=batman`}><a>batman</a></Link></button>
-        <button><Link href={`${pathname}?q=child`}><a>child</a></Link></button>
-        <button><Link href={`${pathname}?q=lahn`}><a>lahn</a></Link></button>
-    </div>)
+    render() {
+        return (<React.Fragment>
+            <TvDataController/>
+            <LocalDataController/>
+        </React.Fragment>);
+    }
 }
 
 export default DemoList
