@@ -9,7 +9,7 @@ export default class TextApp extends App {
         return (
             <Container>
                 <Head>
-                    <title>title</title>
+                    <title>标准案例</title>
                     <meta charSet='utf-8'/>
                     <meta name='viewport' content='initial-scale=1.0, width=device-width'/>
                 </Head>
