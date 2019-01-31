@@ -1,7 +1,7 @@
 import React from 'react'
-import {App, Head, Container} from '../src'
+import {App, Head, Container} from 'dossr'
 import Layout from '../components/app/layout'
-import {Provider} from '../src/context'
+import {Provider} from 'dossr/context'
 
 export default class TextApp extends App {
     render() {
@@ -9,7 +9,7 @@ export default class TextApp extends App {
         return (
             <Container>
                 <Head>
-                    <title>title</title>
+                    <title>Antd整合</title>
                     <meta charSet='utf-8'/>
                     <meta name='viewport' content='initial-scale=1.0, width=device-width'/>
                 </Head>
