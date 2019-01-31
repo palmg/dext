@@ -11,11 +11,11 @@ const server = (middlewares = [], port = 3000) => {
     app.prepare()
         .then(() => {
             const server = express();
-            middlewares.forEach(foo => {
-                server.use((req, res, next) => {
-                    foo(app, req, res, next)
-                })
-            });
+            // middlewares.forEach(foo => {
+            //     server.use((req, res, next) => {
+            //         foo(app, req, res, next)
+            //     })
+            // });
             server.get('*', (req, res) => {
                 return handle(req, res);
             });
@@ -28,4 +28,4 @@ const server = (middlewares = [], port = 3000) => {
         process.exit(1)
     });
 };
-server(middleware, 3001);
+server(middleware, 3000);

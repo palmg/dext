@@ -17,19 +17,13 @@ export const executeCompPreload = initPageProps.buildFoo;
  */
 const pagePreload = (register, foo) => {
     return OriginComp => {
-        const key = fingerprint(OriginComp);
-        console.log('comp:', OriginComp.toString());
-        console.log('pre-finger:', key);
-        initPageProps.register(register, key, foo);
+        initPageProps.register(register, foo);
         return props => {
             return (
                 <Consumer>
                     {value => {
-                        const _value = value['compProps'][key];
+                        const _value = value['compProps'];
                         const params = Object.assign({}, props, _value);
-                        console.log('finger:', key);
-                        console.log('value:', value);
-                        console.log('finger value"', _value);
                         return (<OriginComp {...params}/>)
                     }}
                 </Consumer>)

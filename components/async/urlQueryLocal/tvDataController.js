@@ -4,6 +4,7 @@ import {loadTvListContext} from '../db/tvmaze'
 import Loading from '../../app/layout/loading'
 import {pagePreload} from '../../../src/initProps'
 const TvDataController = props => {
+    console.log(props)
     return (<React.Fragment>
         <p>通过Url的query控制服务端加载</p>
         <OptionAndData shows={props.shows}/>

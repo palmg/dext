@@ -23,4 +23,5 @@ const Bar = withRouter(props => {
         <button><Anchor href={`${pathname}?q=lahn`}><a>lahn</a></Anchor></button>
     </div>)})
 
+console.log('DemoList:', DemoList);
 export default DemoList

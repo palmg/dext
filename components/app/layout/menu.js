@@ -7,13 +7,15 @@ import {appPreload} from '../../../src/initProps'
 const Menu = props => {
     const {menus} = props;
     return (<ul>
-        {menus.map(menu => (
-            <li style={{display: 'inline-block', margin: '5px 5px'}} key={menu.key}>
-                <Anchor href={menu.href}>
-                    <a>{menu.name}</a>
-                </Anchor>
-            </li>
-        ))}
+        {menus.map(menu => {
+            return (
+                <li style={{display: 'inline-block', margin: '5px 5px'}} key={menu.key}>
+                    <Anchor href={menu.href}>
+                        <a>{menu.name}</a>
+                    </Anchor>
+                </li>
+            )
+        })}
     </ul>);
 };
 

@@ -4,23 +4,23 @@
  */
 function InitProps() {
     const _this = this;
-    this.fooDict = {};
+    this.foolist = [];
     this.executeFoo = async function (ctx) {
-        const valueDict = {};
-        const keys = Object.keys(_this.fooDict);
-        for (let key of keys) {
-            valueDict[key] = await _this.fooDict[key](ctx);
+        let valueDict = {}, value;
+        for (let foo of _this.foolist) {
+            value = await foo(ctx)
+            valueDict = Object.assign(valueDict, value);
         }
         return valueDict;
     }
 }
 
-InitProps.prototype.registerFoo = function (key, foo) {
+InitProps.prototype.registerFoo = function (foo) {
     if ('function' === typeof foo) {
-        this.fooDict[key] = foo;
+        this.foolist.push(foo);
     } else if (Promise.prototype[Symbol.toStringTag] === foo.constructor.prototype[Symbol.toStringTag]) {
         //直接注入一个promise
-        this.fooDict[key] = () => foo
+        this.foolist.push(() => foo)
     } else {
         throw `Typeof ${foo.toString()} is unsupported!`
     }

@@ -1,12 +1,13 @@
 import React from 'react'
+import {signature} from '../../src/initProps'
 import TvDataController from '../../components/async/urlQueryLocal/tvDataController'
 import LocalDataController from '../../components/async/urlQueryLocal/localDataController'
 
-const DemoList = props => (<React.Fragment>
+const DemoList = signature('urlQueryLocal', props => (<React.Fragment>
     <LocalDataController/>
     <hr/>
     <TvDataController/>
-</React.Fragment>);
+</React.Fragment>));
 
 //DemoList.prototype[Symbol.toStringTag] = 'urlQueryLocal_DemoList';
 

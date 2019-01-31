@@ -1,4 +1,5 @@
 import React from 'react'
+import Index from "../index";
 
 const load = async () =>{
     return new Promise((res, rej)=>{
@@ -19,5 +20,6 @@ class Simple extends React.Component{
         return(<p>{this.props.data}</p>)
     }
 }
+console.log('Simple:', Simple);
 
 export default Simple;
