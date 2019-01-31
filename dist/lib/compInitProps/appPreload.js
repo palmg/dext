@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _initProps = _interopRequireDefault(require("../util/initProps"));
 
-var _fingerprint = require("../util/fingerprint");
-
 var _applicationContext = _interopRequireDefault(require("../applicationContext"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -21,11 +19,10 @@ exports.executeAppPreload = executeAppPreload;
 
 var appPreload = function appPreload(foo) {
   return function (OriginComp) {
-    var key = (0, _fingerprint.fingerprint)(foo, OriginComp);
-    appInitProps.registerFoo(key, foo);
+    appInitProps.registerFoo(foo);
     return function (props) {
       return _react.default.createElement(_applicationContext.default.Consumer, null, function (value) {
-        var params = Object.assign({}, props, value['appProps'][key]);
+        var params = Object.assign({}, props, value.appProps);
         return _react.default.createElement(OriginComp, params);
       });
     };

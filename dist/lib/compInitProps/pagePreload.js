@@ -32,11 +32,11 @@ exports.executeCompPreload = executeCompPreload;
 
 var pagePreload = function pagePreload(register, foo) {
   return function (OriginComp) {
-    var key = (0, _fingerprint.fingerprint)(foo, OriginComp, register);
-    initPageProps.register(register, key, foo);
+    initPageProps.register(register, foo);
     return function (props) {
       return _react.default.createElement(_applicationContext.Consumer, null, function (value) {
-        var params = Object.assign({}, props, value['compProps'][key]);
+        var _value = value['compProps'];
+        var params = Object.assign({}, props, _value);
         return _react.default.createElement(OriginComp, params);
       });
     };

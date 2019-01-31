@@ -1,6 +1,6 @@
 {
   "name": "dossr",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "sever side render",
   "main": "./index.js",
   "scripts": {
@@ -46,7 +46,8 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "cross-env": "^5.2.0"
+    "cross-env": "^5.2.0",
+    "lru-cache": "^5.1.1"
   },
   "peerDependencies": {
     "next": "^7.0.0",

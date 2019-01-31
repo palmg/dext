@@ -9,6 +9,8 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _fingerprint = require("./fingerprint");
 
+var _signatureClass = require("../util/signatureClass");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -37,11 +39,13 @@ function InitPageProps() {
   this.pathDict = {};
 
   this.buildFoo = function (Component, ctx) {
-    var path = InitPageProps.replaceUrl(ctx.pathname);
-
-    _this.prePath2CompDict(Component, path);
-
-    var methods = _this.compDict[(0, _fingerprint.fingerprint)(Component)],
+    var path = InitPageProps.replaceUrl(ctx.pathname),
+        signature = (0, _signatureClass.getClassSignature)(Component),
+        methods = function () {
+      var methodList = _this.compDict[signature] || [];
+      methodList = methodList.concat(_this.pathDict[path] || []);
+      return methodList;
+    }(),
         pageMethod = Component.getInitialProps,
         compMethod = methods ?
     /*#__PURE__*/
@@ -49,7 +53,7 @@ function InitPageProps() {
       var _ref = _asyncToGenerator(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee(ctx) {
-        var compProps, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, method;
+        var compProps, props, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, method;
 
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
@@ -64,65 +68,66 @@ function InitPageProps() {
 
               case 6:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 14;
+                  _context.next = 15;
                   break;
                 }
 
                 method = _step.value;
                 _context.next = 10;
-                return method.foo(ctx);
+                return method(ctx);
 
               case 10:
-                compProps[method.key] = _context.sent;
+                props = _context.sent;
+                compProps = Object.assign(compProps, props);
 
-              case 11:
+              case 12:
                 _iteratorNormalCompletion = true;
                 _context.next = 6;
                 break;
 
-              case 14:
-                _context.next = 20;
+              case 15:
+                _context.next = 21;
                 break;
 
-              case 16:
-                _context.prev = 16;
+              case 17:
+                _context.prev = 17;
                 _context.t0 = _context["catch"](4);
                 _didIteratorError = true;
                 _iteratorError = _context.t0;
 
-              case 20:
-                _context.prev = 20;
+              case 21:
                 _context.prev = 21;
+                _context.prev = 22;
 
                 if (!_iteratorNormalCompletion && _iterator.return != null) {
                   _iterator.return();
                 }
 
-              case 23:
-                _context.prev = 23;
+              case 24:
+                _context.prev = 24;
 
                 if (!_didIteratorError) {
-                  _context.next = 26;
+                  _context.next = 27;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 26:
-                return _context.finish(23);
-
               case 27:
-                return _context.finish(20);
+                return _context.finish(24);
 
               case 28:
-                return _context.abrupt("return", compProps);
+                return _context.finish(21);
 
               case 29:
+                return _context.abrupt("return", compProps);
+
+              case 30:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 16, 20, 28], [21,, 23, 27]]);
+        }, _callee, this, [[4, 17, 21, 29], [22,, 24, 28]]);
       }));
 
       return function (_x) {
@@ -133,27 +138,6 @@ function InitPageProps() {
     return InitPageProps.buildPagePropsMethod(pageMethod, compMethod);
   };
 }
-/**
- * 对Path进行前置处理转换，将所有的页面路由方法绑定到compDict上。
- */
-
-
-InitPageProps.prototype.prePath2CompDict = function (component, path) {
-  var pathMethods = this.pathDict[path],
-      finger = (0, _fingerprint.fingerprint)(component);
-
-  if (pathMethods) {
-    var compMethods = this.compDict[finger];
-
-    if (compMethods) {
-      this.compDict[finger] = compMethods.concat(pathMethods);
-    } else {
-      this.compDict[finger] = pathMethods;
-    }
-
-    delete this.pathDict[path];
-  }
-};
 /**
  * 返回一个通用方法。
  * @param pageMethod
@@ -234,69 +218,61 @@ InitPageProps.buildPagePropsMethod = function (pageMethod, compMethod) {
 
 /**
  *
- * @param register {Function|String} 绑定组件页面url路径，或一个注册组件的方法。(register)=>{register(
+ * @param register {Function|String} 绑定组件页面url路径、页面组件的签名、或一个注册组件的方法。(register)=>{register(
  *   require.ensure([], require => {
  *       call(require('../../../pages/async/urlQueryLocal'))
  *   })
  * )}
- * @param key
- * @param foo
+ * @param foo 异步执行方法
  */
 
 
-InitPageProps.prototype.register = function (register, key, foo) {
+InitPageProps.prototype.register = function (register, foo) {
   var _foo = this.wrapperPromise(foo);
 
+  console.log(register);
+
   if ('string' === typeof register) {
-    this.registerPath(register, key, foo);
+    register.match(/\//) ? this.registerPath(register, foo) : this.registerSignature(register, foo);
   } else if ('function' === typeof register) {
-    this.registerFunction(register, key, _foo);
+    this.registerFunction(register, _foo);
   } else {
     throw "Type Error! Register Access String and Function!";
   }
 };
 
-InitPageProps.prototype.registerPath = function (path, key, foo) {
+InitPageProps.prototype.registerPath = function (path, foo) {
   var pathname = InitPageProps.replaceUrl(path),
       _methods = this.pathDict[pathname];
 
   if (_methods) {
-    _methods.push({
-      key: key,
-      foo: foo
-    });
+    _methods.push(foo);
   } else {
-    this.pathDict[pathname] = [{
-      key: key,
-      foo: foo
-    }];
+    this.pathDict[pathname] = [foo];
   }
 };
 
-InitPageProps.prototype.registerFunction = function (register, key, foo) {
-  var _this2 = this;
-
+InitPageProps.prototype.registerFunction = function (call, foo) {
   var _this = this,
       _foo = _this.wrapperPromise(foo);
 
-  register(function (Comp) {
+  call(function (Comp) {
     //Comp是对象
-    var Component = Comp.default ? Comp.default : Comp;
+    var Component = Comp.default ? Comp.default : Comp,
+        signature = Component.prototype[Symbol.toStringTag];
 
-    var _methods = _this.compDict[(0, _fingerprint.fingerprint)(Component)];
-
-    if (_methods) {
-      _methods.push({
-        key: key,
-        foo: _foo
-      });
-    } else {
-      _this2.compDict[(0, _fingerprint.fingerprint)(Component)] = [{
-        key: key,
-        foo: _foo
-      }];
-    }
+    _this.registerSignature(signature, _foo);
   });
+};
+
+InitPageProps.prototype.registerSignature = function (signature, foo) {
+  var _methods = this.compDict[signature];
+
+  if (_methods) {
+    _methods.push(foo);
+  } else {
+    this.compDict[signature] = [foo];
+  }
 };
 /**
  * 如果传入的是一个promise，使用方法包装

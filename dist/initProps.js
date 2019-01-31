@@ -15,9 +15,17 @@ Object.defineProperty(exports, "pagePreload", {
     return _pagePreload.default;
   }
 });
+Object.defineProperty(exports, "signature", {
+  enumerable: true,
+  get: function get() {
+    return _signatureClass.signatureClass;
+  }
+});
 
 var _appPreload = _interopRequireDefault(require("./lib/compInitProps/appPreload"));
 
 var _pagePreload = _interopRequireDefault(require("./lib/compInitProps/pagePreload"));
+
+var _signatureClass = require("./lib/util/signatureClass");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
