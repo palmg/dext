@@ -37,10 +37,10 @@
   "dependencies": {
     "copyfiles": "^2.1.0",
     "fs-extra": "^7.0.1",
-    "next": "^7.0.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
     "isomorphic-unfetch": "^3.0.0",
+    "next": "^7.0.3",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "ua-parser-js": "^0.7.19"
   },
   "devDependencies": {

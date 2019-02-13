@@ -6,7 +6,7 @@ var path = require('path'),
  * 创建模板项目
  * @param type {String} 项目类型 [standard|simple|antd]
  */
-function create(type = 'standard') {
+function create(type = 'simple') {
     var ssrDir = path.resolve(__dirname, '..', 'example', type);
     var curRoot = process.cwd();
     var nodeModules = path.resolve(curRoot, 'node_modules');

@@ -11,17 +11,17 @@ const DemoList = signature('urlQueryLocal', props => (<React.Fragment>
 
 //DemoList.prototype[Symbol.toStringTag] = 'urlQueryLocal_DemoList';
 
-class Demo extends React.Component {
-    get [Symbol.toStringTag]() {
-        return 'urlQueryLocal_DemoList';
-    }
-
-    render() {
-        return (<React.Fragment>
-            <TvDataController/>
-            <LocalDataController/>
-        </React.Fragment>);
-    }
-}
+// class Demo extends React.Component {
+//     get [Symbol.toStringTag]() {
+//         return 'urlQueryLocal_DemoList';
+//     }
+//
+//     render() {
+//         return (<React.Fragment>
+//             <TvDataController/>
+//             <LocalDataController/>
+//         </React.Fragment>);
+//     }
+// }
 
 export default DemoList
