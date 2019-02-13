@@ -65,7 +65,7 @@ function (_App) {
    * @param router {Object} Nextjs自定义的路由对象。
    * @param router.asPath {String} 页面切换之前的地址，比如从/切换到/about这里就是/。当设置Link的asPath属性时这里显示的asPath指向的路径
    * @param router.pathname {String} 与asPath类似，但是记录的是真实路径。
-   * @param ctx {Object} Nextjs定义的整个app的上下文，在客户端之后asPath、pathname和query3个属性，在服务端会有res和req。
+   * @param ctx {Object} Nextjs定义的整个app的上下文，在客户端只有asPath、pathname和query3个属性，在服务端会有res和req。
    * @param ctx.asPath {String} 和router.asPath类似，但是显示的是切换之后的地址。
    * @param ctx.pathname {String} 与router.pathname类似。
    * @param ctx.query {String} URL上的查询参数，比如?q=abc, router.query={q:'abc'}。

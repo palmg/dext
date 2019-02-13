@@ -1,4 +1,4 @@
-import {Document} from '../src'
+import {Document} from 'dossr'
 import React from "react";
 
 /**
